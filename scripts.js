@@ -15,8 +15,8 @@ window.addEventListener("load", function() {
     
     image.style.bottom = "0px";
     image.style.left = "0px";
-    image.style.top = "200px";
-    image.style.right = "100px";
+    // image.style.top = "200px";
+    // image.style.right = "100px";
     
     console.log(image.style.bottom);
     console.log(image.style.left);
@@ -60,8 +60,8 @@ window.addEventListener("load", function() {
         rocket.style.bottom = document.getElementById("rocket").style.bottom;
         console.log(rocket.style.bottom);
 
-        rocketYposition = (10;
-        rocketYposition.style.top = rocketYposition + "px"; 
+        // rocketYposition = (10);
+        // rocketYposition.style.top = rocketYposition + "px"; 
         // let position = document.getElementById("rocket").offsetTop;
         // if (position <= 0) {
         //     document.getElementById("rocket").style.top = "325px";
