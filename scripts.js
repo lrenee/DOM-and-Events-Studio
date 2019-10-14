@@ -13,10 +13,10 @@ window.addEventListener("load", function() {
     console.log(image.style.right);
     console.log(image.style.current);
     
-    image.style.bottom = "0px";
-    image.style.left = "0px";
+    image.style.bottom = "285px";
+    image.style.left = "195px";
     // image.style.top = "200px";
-    // image.style.right = "100px";
+    // image.style.right = "300px";
     
     console.log(image.style.bottom);
     console.log(image.style.left);
