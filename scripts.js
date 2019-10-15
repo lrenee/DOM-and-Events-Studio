@@ -7,25 +7,20 @@ window.addEventListener("load", function() {
     let shuttleHeight = document.getElementById("spaceShuttleHeight");
     let height = Number(shuttleHeight.innerHTML);
     let image = document.getElementById("rocket");
-    console.log(image.style.top);
-    console.log(image.style.bottom);
-    console.log(image.style.left);
-    console.log(image.style.right);
-    console.log(image.style.current);
+
+    let topLimit = 285;
+    let bottomLimit = -50;
+    let rightLimit = 570;
+    let leftLimit = -40;
+
+    let initialBottom = "-5px";
+    let initialLeft = "260px";
+        
+    image.style.bottom = initialBottom;
+    image.style.left = initialLeft;
     
-    image.style.bottom = "285px";
-    image.style.left = "195px";
-    // image.style.top = "200px";
-    // image.style.right = "300px";
-    
-    console.log(image.style.bottom);
-    console.log(image.style.left);
-    
-    // image.style.top = "200px";
     let move = 10;
-    let x = 0;
-    let rocketXposition = 0;
-    let rocketYposition = 0;
+    
     let takeoffButton = document.getElementById("takeoff");
     takeoffButton.addEventListener("click", function (event) {
         let response = window.confirm("Please confirm that the shuttle is ready for takeoff.");
@@ -35,6 +30,8 @@ window.addEventListener("load", function() {
             background.style.backgroundColor = "blue";
             height = height + 10000;
             shuttleHeight.innerHTML = height;
+            image.style.bottom = `${Number(initialBottom.replace("px","")) + move}px`;
+            image.style.left = initialLeft;
         };
     });
     let landingButton = document.getElementById("landing");
@@ -44,6 +41,8 @@ window.addEventListener("load", function() {
         background.style.backgroundColor = "green";
         shuttleHeight.innerHTML = 0;
         height = 0;
+        image.style.bottom = initialBottom;
+        image.style.left = initialLeft;
     });
     let abortMissionButton = document.getElementById("missionAbort");
     abortMissionButton.addEventListener("click", function (event) {
@@ -53,26 +52,55 @@ window.addEventListener("load", function() {
             background.style.backgroundColor = "green";
             shuttleHeight.innerHTML = 0;
             height = 0;
+            image.style.bottom = initialBottom;
+            image.style.left = initialLeft;
         }
     })
     let upButton = document.getElementById("moveUp");
     upButton.addEventListener("click", function (event) {
-        rocket.style.bottom = document.getElementById("rocket").style.bottom;
-        console.log(rocket.style.bottom);
-
-        // rocketYposition = (10);
-        // rocketYposition.style.top = rocketYposition + "px"; 
-        // let position = document.getElementById("rocket").offsetTop;
-        // if (position <= 0) {
-        //     document.getElementById("rocket").style.top = "325px";
-        //     x = 325;
-        // } else if (postion <=10) {
-        //     document.getElementById("rocket").style.top = "0px";
-        //     x = 0;
-        // } else {
-        //     x = x - move;
-        //     document.getElementById("rocket").style.top = x + "px";
-        // }
+        let current = image.style.bottom;
+        if ((Number(current.replace("px","")) + move) < topLimit) {
+        image.style.bottom = `${Number(current.replace("px","")) + move}px`;
+        } else {
+            image.style.bottom = `${bottomLimit}px`;
+        };
+        height = height + 10000;
+        shuttleHeight.innerHTML = height;       
     });
+    let downButton = document.getElementById("moveDown");
+    downButton.addEventListener("click", function (event) {
+        let current = image.style.bottom;
+        if ((height - 10000) >= 0) {
+            if ((Number(current.replace("px","")) - move) > bottomLimit) {
+                image.style.bottom = `${Number(current.replace("px","")) - move}px`;
+            } else {
+                image.style.bottom = `${topLimit}px`;
+            }; 
+            height = height - 10000;
+            shuttleHeight.innerHTML = height;
+        } else {
+            height = 0;
+            shuttleHeight.innerHTML = height;
+        };                  
+    });
+    let rightButton = document.getElementById("moveRight");
+    rightButton.addEventListener("click", function (event) {
+        let current = image.style.left;
+        if ((Number(current.replace("px","")) + move) < rightLimit) {
+        image.style.left = `${Number(current.replace("px","")) + move}px`;
+        } else {
+            image.style.left = `${leftLimit}px`;
+        };       
+    });
+    let leftButton = document.getElementById("moveLeft");
+    leftButton.addEventListener("click", function (event) {
+        let current = image.style.left;
+        if ((Number(current.replace("px","")) - move) > leftLimit) {
+        image.style.left = `${Number(current.replace("px","")) - move}px`;
+        } else {
+            image.style.left = `${rightLimit}px`;
+        };       
+    });
+
 
 });
